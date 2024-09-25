@@ -3,8 +3,11 @@ const router = express.Router()
 
 const User = require('../models/user.js')
 
-// router logic will go here <-------- (later)
 
+router.get('/', (req, res) => {
+    res.render('foods/index.ejs')
+  });
+  
 
 module.exports = router
 
