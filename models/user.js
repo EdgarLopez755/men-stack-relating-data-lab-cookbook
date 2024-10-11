@@ -3,9 +3,11 @@ const mongoose = require('mongoose');
 const foodSchema = new mongoose.Schema({
   name: String,
   quantity: Number,
-  expirationDate: Date,
-  notes: String
+  expiratonDate: Number,
+  
 })
+
+const Foods = mongoose.model('Foods', foodSchema)
 
 const userSchema = mongoose.Schema({
   username: {
@@ -22,4 +24,7 @@ const userSchema = mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
+
+
+module.exports = Foods;
 module.exports = User;

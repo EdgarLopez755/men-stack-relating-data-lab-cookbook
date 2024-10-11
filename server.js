@@ -25,7 +25,7 @@ mongoose.connection.on('connected', () => {
 
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
-// app.use(morgan('dev'));
+app.use(morgan('dev'));
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -40,6 +40,18 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get('/foods', (req,res) => {
+  res.render('/foods/new.ejs');
+});
+
+app.get('/foods/new', (req, res) => {
+  const user = req.session.user;
+  res.render('foods/new.ejs', { user });
+});
+
+
+
+
 app.get('/vip-lounge', (req, res) => {
   if (req.session.user) {
     res.send(`Welcome to the party ${req.session.user.username}.`);
@@ -53,7 +65,10 @@ app.use(passUserToView)
 app.use('/auth', authController);
 app.use(isSignedIn)
 app.use('/users/:userId/foods',foodsController)
+app.use('/foods',foodsController)
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
 });
+
+
