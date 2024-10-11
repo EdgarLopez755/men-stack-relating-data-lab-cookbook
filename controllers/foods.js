@@ -54,6 +54,22 @@ router.put('/:foodId', async (req, res) => {
   }
 })
 
+
+
+router.delete('/:foodId', async(req, res)=>{
+  try {
+    const currentUser = await User.findById(req.session.user._id)
+    currentUser.pantry.id(req.params.foodId).deleteOne()
+    await currentUser.save()
+    
+    res.redirect(`/users/${req.session.user._id}/foods`)
+    
+  } catch (error) {
+    console.log(error)
+    res.redirect('/')
+  }
+})
+
 router.get('/:foodsId/edit', async (req, res) => { 
   try {
       const currentUser = await User.findById(req.session.user._id) 
@@ -67,22 +83,6 @@ router.get('/:foodsId/edit', async (req, res) => {
       res.redirect('/')
   }
 })
-
-
-router.delete('/:foodId', async(req, res)=>{
-  try {
-      const currentUser = await User.findById(req.session.user._id)
-      currentUser.pantry.id(req.params.foodId).deleteOne()
-      await currentUser.save()
-      
-      res.redirect(`/users/${req.session.user._id}/foods`)
-      
-  } catch (error) {
-      console.log(error)
-      res.redirect('/')
-  }
-})
-
 
 
 
