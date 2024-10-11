@@ -2,8 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Pantry</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+
+    <title>My Pantry</title> 
+
   </head>
 
 
@@ -14,8 +16,11 @@
             <% if (foods && foods.length > 0) { %>
             <% foods.forEach((food) => { %>
             <li>
-                    Food: <%= food.name %>, Expiration Date: <%= food.expirationDate %>
-                </a>
+                <strong>Food:</strong> <%= food.name %>
+                <br>
+                <strong>Quantity:</strong> <%= food.quantity %>
+                <br>
+                
                 <form  action="/users/<%= user._id %>/foods/<%= food._id %>?_method=DELETE"method="POST"  style="display:inline">
                     <button type="submit">Delete</button>
                 </form>
